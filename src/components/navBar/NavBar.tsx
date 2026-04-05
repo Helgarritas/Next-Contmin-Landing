@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Componentes
 import Image from "next/image";
 import BtnSnake from "../btnSnake/BtnSnake";
-import NavMenu from "../navMenu/NavMenu";
 // Estilos
 import "./navbar.css";
 
@@ -15,21 +14,20 @@ gsap.registerPlugin(ScrollTrigger);
 const links = ["hogar", "propuesta", "nosotros", "soluciones", "contactar"];
 
 export default function NavBar() {
-  // Referencias
   const navRef = useRef(null);
   const navBgRef = useRef<HTMLDivElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
-  // Estado para controlar si el menú móvil está abierto
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  // Hooks de navegación
   const pathname = usePathname();
   const router = useRouter();
 
-  // Efecto para la animación del scroll
+  // ── Animación de scroll para desktop ──
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1025px)", () => {
+    mm.add("(min-width: 641px)", () => {
       const trigger = ScrollTrigger.create({
         start: 0,
         onUpdate: (self) => {
@@ -48,101 +46,166 @@ export default function NavBar() {
           }
         },
       });
-
-      return () => {
-        trigger.kill();
-      };
+      return () => trigger.kill();
     });
 
-    return () => {
-      mm.revert();
-    };
+    return () => mm.revert();
   }, []);
 
+  // ── Animación del drawer móvil ──
   useEffect(() => {
-    if (window.innerWidth <= 640 && ulRef.current) {
-      const liElements = Array.from(ulRef.current.querySelectorAll("li")) as HTMLLIElement[];
-      const buttonElement = ulRef.current.querySelector(".btn-contactar") as HTMLButtonElement | null;
+    if (!drawerRef.current || !overlayRef.current) return;
 
-      const linksAndButton = buttonElement ? [...liElements, buttonElement] : liElements;
+    const drawerLinks = drawerRef.current.querySelectorAll(".drawer-link");
 
-      if (menuOpen) {
-        gsap.to(ulRef.current, { x: "80%", duration: 0.5, ease: "power2.out" });
-        gsap.to(linksAndButton, { opacity: 1, duration: 0.5, stagger: 0.1 });
-      } else {
-        gsap.to(ulRef.current, { x: "-100%", duration: 0.5, ease: "power2.in" });
-        gsap.to(linksAndButton, { opacity: 0, duration: 0.3 });
-      }
+    if (menuOpen) {
+      // Bloquear scroll del body
+      document.body.style.overflow = "hidden";
+      // Mostrar overlay
+      gsap.to(overlayRef.current, { autoAlpha: 1, duration: 0.3 });
+      // Deslizar el drawer
+      gsap.to(drawerRef.current, { x: "0%", duration: 0.4, ease: "power3.out" });
+      // Animar links con stagger
+      gsap.fromTo(
+        drawerLinks,
+        { x: -30, autoAlpha: 0 },
+        { x: 0, autoAlpha: 1, duration: 0.4, stagger: 0.08, delay: 0.15, ease: "power2.out" }
+      );
+    } else {
+      document.body.style.overflow = "";
+      gsap.to(overlayRef.current, { autoAlpha: 0, duration: 0.25 });
+      gsap.to(drawerRef.current, { x: "-100%", duration: 0.35, ease: "power2.in" });
+      gsap.to(drawerLinks, { autoAlpha: 0, duration: 0.15 });
     }
   }, [menuOpen]);
 
-  const handleScroll = (link: string) => {
+  const handleScroll = useCallback((link: string) => {
+    // Cerrar menú primero
+    setMenuOpen(false);
+    
     if (pathname !== "/") {
       router.push("/");
       return;
     }
-    const el = document.getElementById(link);
-    if (el) {
-      const yOffset = -80; // Ajusta según el alto de tu navbar
-      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  };
+    // Pequeño delay para que el drawer se cierre antes del scroll
+    setTimeout(() => {
+      const el = document.getElementById(link);
+      if (el) {
+        const yOffset = -80;
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }, 350);
+  }, [pathname, router]);
 
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
-  };
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
-    <nav
-      ref={navRef}
-      className="px-[70px] w-full fixed flex items-center z-50 nav 
-        max-sm:px-[32px] max-sm:h-[100vh] max-sm:blur-none max-sm:bg-transparent"
-    >
-      {/* Fondo animado que reemplaza nav::before */}
-      <div
-        ref={navBgRef}
-        className="absolute top-0 left-0 w-full h-0 pointer-events-none"
-        style={{ backgroundColor: "rgba(255, 255, 255, 0.10)", backdropFilter: "blur(12px)" }}
-      />
-      <div
-        className="max-sm:absolute max-sm:top-[22px] z-50 hidden max-sm:inline-block max-sm:left-[32px]"
-        onClick={toggleMenu}
+    <>
+      {/* ════════ NAVBAR DESKTOP + HEADER MÓVIL ════════ */}
+      <nav
+        ref={navRef}
+        className="nav-bar px-[70px] w-full h-[80px] fixed flex items-center z-50
+          max-sm:px-[32px] max-sm:h-[60px]"
       >
-        <NavMenu />
-      </div>
-      <ul
-        ref={ulRef}
-        className="w-full h-[80px] grid grid-cols-4 items-center uppercase text-sm
-                  max-sm:pt-[100px] max-sm:h-full max-sm:flex max-sm:flex-col max-sm:items-start max-sm:z-10
-                  max-sm:-translate-x-full"
-      >
-        <div className="col-start-1 col-end-3 flex items-center shrink-0 max-sm:absolute max-sm:top-4 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:mb-6 mt-2 z-10">
+        {/* Fondo animado desktop */}
+        <div
+          ref={navBgRef}
+          className="absolute top-0 left-0 w-full h-0 pointer-events-none"
+          style={{ backgroundColor: "rgba(255, 255, 255, 0.10)", backdropFilter: "blur(12px)" }}
+        />
+
+        {/* Hamburguesa (solo móvil) */}
+        <button
+          onClick={toggleMenu}
+          className="hamburger-btn hidden max-sm:flex z-50 relative w-[30px] h-[22px] flex-col justify-between"
+          aria-label="Abrir menú"
+        >
+          <span className={`hamburger-line ${menuOpen ? "hamburger-open-top" : ""}`} />
+          <span className={`hamburger-line ${menuOpen ? "hamburger-open-mid" : ""}`} />
+          <span className={`hamburger-line ${menuOpen ? "hamburger-open-bot" : ""}`} />
+        </button>
+
+        {/* Logo (visible en ambos) */}
+        <div className="max-sm:absolute max-sm:left-1/2 max-sm:-translate-x-1/2 z-10">
           <Image
             src="/image/banner/LOGO-DRILLCORP.png"
             alt="Drillcorp Logo"
-            width={140}
-            height={55}
-            className="object-contain"
+            width={130}
+            height={50}
+            className="object-contain max-sm:w-[110px]"
             priority
           />
         </div>
-        <div
-          className="col-start-3 flex justify-between max-sm:flex-col max-sm:gap-2 max-sm:mt-[60px]"
+
+        {/* Links desktop */}
+        <ul
+          ref={ulRef}
+          className="flex-1 h-full grid grid-cols-3 items-center uppercase text-sm ml-[60px]
+            max-sm:hidden"
         >
-          {links.slice(0, 4).map((link, i) => (
-            <li key={i} onClick={() => handleScroll(link)}>
-              <BtnSnake text={link} className="max-sm:text-base" />
-            </li>
+          <div className="col-start-1 col-end-3 flex justify-between">
+            {links.slice(0, 4).map((link, i) => (
+              <li key={i} onClick={() => handleScroll(link)} className="cursor-pointer">
+                <BtnSnake text={link} />
+              </li>
+            ))}
+          </div>
+          <button
+            onClick={() => handleScroll("contactar")}
+            className="ml-auto"
+          >
+            <BtnSnake text="contactar" />
+          </button>
+        </ul>
+      </nav>
+
+      {/* ════════ OVERLAY OSCURO (solo móvil) ════════ */}
+      <div
+        ref={overlayRef}
+        onClick={() => setMenuOpen(false)}
+        className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm invisible opacity-0
+          sm:hidden"
+      />
+
+      {/* ════════ DRAWER LATERAL (solo móvil) ════════ */}
+      <div
+        ref={drawerRef}
+        className="fixed top-0 left-0 w-[280px] h-full z-50 -translate-x-full
+          flex flex-col bg-[#0a0c1a]/95 backdrop-blur-xl border-r border-white/10
+          sm:hidden"
+      >
+        {/* Logo en el drawer */}
+        <div className="px-8 pt-6 pb-4 border-b border-white/10">
+          <Image
+            src="/image/banner/LOGO-DRILLCORP.png"
+            alt="Drillcorp Logo"
+            width={120}
+            height={45}
+            className="object-contain"
+          />
+        </div>
+
+        {/* Links del menú */}
+        <div className="flex-1 flex flex-col px-8 pt-8 gap-1">
+          {links.map((link, i) => (
+            <button
+              key={i}
+              onClick={() => handleScroll(link)}
+              className="drawer-link text-left py-3 uppercase text-base tracking-wide
+                text-white/80 hover:text-white hover:pl-2 transition-all duration-300
+                border-b border-white/5 last:border-0"
+            >
+              {link}
+            </button>
           ))}
         </div>
-        <button
-          onClick={() => handleScroll("contactar")}
-          className="ml-auto max-sm:ml-0 max-sm:mt-2 btn-contactar"
-        >
-          <BtnSnake text="contactar" className="max-sm:text-base teext-white" />
-        </button>
-      </ul>
-    </nav>
+
+        {/* Footer del drawer */}
+        <div className="px-8 py-6 border-t border-white/10">
+          <p className="text-xs text-white/40 uppercase tracking-wider">© 2025 Drillcorp</p>
+        </div>
+      </div>
+    </>
   );
 }

@@ -1,3 +1,36 @@
-nav {
-  overflow: hidden; 
+/* ── NavBar base ── */
+.nav-bar {
+  pointer-events: auto;
+}
+
+/* ── Hamburger icon lines ── */
+.hamburger-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+/* Hamburger → X animation */
+.hamburger-open-top {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger-open-mid {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-open-bot {
+  transform: translateY(-10px) rotate(-45deg);
 }
