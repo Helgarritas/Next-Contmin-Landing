@@ -1,11 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  eslint: {
-    // Permite que la compilación de producción termine con éxito
-    // aunque existan errores de ESLint.
-    ignoreDuringBuilds: true,
-  },
   async headers() {
     return [
       {
