@@ -11,12 +11,13 @@ import BtnSnake from "../btnSnake/BtnSnake";
 import "./navbar.css";
 
 gsap.registerPlugin(ScrollTrigger);
-const links = ["hogar", "propuesta", "nosotros", "soluciones", "contactar"];
+const links = ["hogar", "propuesta", "soluciones", "contactar"];
 
 export default function NavBar() {
   const navRef = useRef(null);
   const navBgRef = useRef<HTMLDivElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,13 +36,16 @@ export default function NavBar() {
           if (scrollPos === 0) {
             gsap.to(navBgRef.current, { height: "0%", duration: 0.2, overwrite: "auto" });
             gsap.to(ulRef.current, { opacity: 1, duration: 0.2, overwrite: "auto" });
+            gsap.to(logoRef.current, { opacity: 1, duration: 0.2, overwrite: "auto" });
           } else {
             if (self.direction < 0) {
               gsap.to(navBgRef.current, { height: "100%", duration: 0.35, overwrite: "auto" });
               gsap.to(ulRef.current, { opacity: 1, delay: 0.15, duration: 0.3, overwrite: "auto" });
+              gsap.to(logoRef.current, { opacity: 1, delay: 0.15, duration: 0.3, overwrite: "auto" });
             } else {
               gsap.to(navBgRef.current, { height: "0%", duration: 0.3, overwrite: "auto" });
               gsap.to(ulRef.current, { opacity: 0, duration: 0.25, overwrite: "auto" });
+              gsap.to(logoRef.current, { opacity: 0, duration: 0.25, overwrite: "auto" });
             }
           }
         },
@@ -80,23 +84,26 @@ export default function NavBar() {
   }, [menuOpen]);
 
   const handleScroll = useCallback((link: string) => {
-    // Cerrar menú primero
-    setMenuOpen(false);
-    
     if (pathname !== "/") {
-      router.push("/");
+      router.push(`/#${link}`);
+      setMenuOpen(false);
       return;
     }
-    // Pequeño delay para que el drawer se cierre antes del scroll
-    setTimeout(() => {
+
+    const scrollToSection = () => {
       const el = document.getElementById(link);
       if (el) {
-        const yOffset = -80;
-        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
+        el.scrollIntoView({ behavior: "smooth" });
       }
-    }, 350);
-  }, [pathname, router]);
+    };
+
+    if (menuOpen) {
+      setMenuOpen(false);
+      setTimeout(scrollToSection, 350);
+    } else {
+      scrollToSection();
+    }
+  }, [pathname, router, menuOpen]);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
@@ -127,12 +134,13 @@ export default function NavBar() {
         </button>
 
         {/* Logo (visible en ambos) */}
-        <div className="max-sm:absolute max-sm:left-1/2 max-sm:-translate-x-1/2 z-10">
+        <div ref={logoRef} className="max-sm:absolute max-sm:left-1/2 max-sm:-translate-x-1/2 z-10">
           <Image
             src="/image/banner/LOGO-DRILLCORP.png"
             alt="Drillcorp Logo"
             width={130}
             height={50}
+            sizes="130px"
             className="object-contain max-sm:w-[110px]"
             priority
           />
@@ -141,21 +149,25 @@ export default function NavBar() {
         {/* Links desktop */}
         <ul
           ref={ulRef}
-          className="flex-1 h-full grid grid-cols-3 items-center uppercase text-sm ml-[60px]
+          className="relative z-20 w-1/2 ml-auto h-full flex items-center justify-between uppercase text-sm
             max-sm:hidden"
         >
-          <div className="col-start-1 col-end-3 flex justify-between">
+          <div className="flex items-center gap-[50px]">
             {links.slice(0, 4).map((link, i) => (
-              <li key={i} onClick={() => handleScroll(link)} className="cursor-pointer">
-                <BtnSnake text={link} />
+              <li 
+                key={i} 
+                onClick={() => handleScroll(link)} 
+                className="cursor-pointer text-white/60 hover:text-white transition-colors duration-300"
+              >
+                {link}
               </li>
             ))}
           </div>
           <button
             onClick={() => handleScroll("contactar")}
-            className="ml-auto"
+            className="text-white/60 hover:text-white transition-colors duration-300 uppercase"
           >
-            <BtnSnake text="contactar" />
+            contactar
           </button>
         </ul>
       </nav>
@@ -182,6 +194,8 @@ export default function NavBar() {
             alt="Drillcorp Logo"
             width={120}
             height={45}
+            sizes="120px"
+            loading="lazy"
             className="object-contain"
           />
         </div>
@@ -193,7 +207,7 @@ export default function NavBar() {
               key={i}
               onClick={() => handleScroll(link)}
               className="drawer-link text-left py-3 uppercase text-base tracking-wide
-                text-white/80 hover:text-white hover:pl-2 transition-all duration-300
+                text-white/60 hover:text-white transition-colors duration-300
                 border-b border-white/5 last:border-0"
             >
               {link}

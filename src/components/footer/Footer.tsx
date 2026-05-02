@@ -37,7 +37,7 @@ export default function Footer() {
             <div className="pl-6 flex flex-col items-start gap-1.5 text-sm uppercase
               max-sm:pl-0
             ">
-              {["hogar", "propuesta", "nosotros", "soluciones"].map((link, i) => (
+              {["hogar", "propuesta", "soluciones"].map((link, i) => (
                 <button key={i} onClick={() => handleScroll(link)}>
                   <BtnSnake text={link} />
                 </button>

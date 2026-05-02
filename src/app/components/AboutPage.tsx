@@ -16,8 +16,8 @@ export default function AboutPage() {
         <div className="grid grid-cols-2
           max-sm:grid-cols-1 max-sm:space-y-2.5
         ">
-          <h1 className="text-3xl uppercase">acerca de nuestra empresa</h1>
-          <p className="pl-6 pr-8 text-secondary-foreground max-sm:pl-0">
+          <h2 className="text-3xl uppercase">acerca de nuestra empresa</h2>
+          <p className="pl-6 pr-8 text-secondary-foreground leading-relaxed max-sm:pl-0">
             Somos una empresa especializada en servicios de perforación técnica para proyectos de alta exigencia. Operamos bajo los más estrictos estándares internacionales de seguridad, eficiencia y control de calidad. Nuestro compromiso se centra en cuatro pilares fundamentales: el cumplimiento riguroso de los plazos de entrega, la optimización de los costos operativos de nuestros clientes, la entrega de información geológica altamente confiable y el desarrollo de operaciones que priorizan la seguridad y la sostenibilidad ambiental.
           </p>
         </div>

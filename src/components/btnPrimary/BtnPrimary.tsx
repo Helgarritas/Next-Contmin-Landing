@@ -2,7 +2,6 @@
 
 import { useCallback } from "react";
 import { HyperText } from "../magicui/hyper-text";
-import { ChevronRight } from "lucide-react";
 
 interface Props {
   text: string;
@@ -32,8 +31,11 @@ export default function BtnPrimary({ text = "contactar", className }: Props) {
             {text}
           </HyperText>
         </div>
-        <ChevronRight className="w-5.5 h-5.5 shrink-0 opacity-80" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-80">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
       </div>
     </button>
   );
 }
+

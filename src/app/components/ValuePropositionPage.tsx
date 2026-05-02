@@ -1,10 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const items = [
   {
@@ -48,35 +44,34 @@ function ValueCard({
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (cardRef.current) {
-      gsap.fromTo(
-        cardRef.current,
-        { autoAlpha: 0, y: 40 },
-        {
-          duration: 0.8,
-          autoAlpha: 1,
-          y: 0,
-          delay: index * 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top 85%",
-          },
+    if (!cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add("is-visible");
+          }, index * 150);
+          observer.unobserve(entry.target);
         }
-      );
-    }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
   }, [index]);
 
   return (
     <div
       ref={cardRef}
-      className="group relative flex flex-col items-center text-center gap-6 p-8 rounded-2xl border border-border bg-card/30 backdrop-blur-sm"
+      className="group relative flex flex-col items-center text-center gap-6 p-8 rounded-2xl border border-border bg-card/30 opacity-0 scale-95 translate-y-5 transition-all duration-700 ease-out [&.is-visible]:opacity-100 [&.is-visible]:scale-100 [&.is-visible]:translate-y-0"
     >
       {/* Glow accent */}
       <div className="absolute -top-px left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-      {/* Icon */}
-      <div className="w-20 h-20 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+      {/* Icon with scale on hover */}
+      <div className="w-20 h-20 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-primary/20">
         {item.icon}
       </div>
 
@@ -84,7 +79,7 @@ function ValueCard({
       <h4 className="text-xl uppercase font-medium leading-tight">{item.title}</h4>
 
       {/* Description */}
-      <p className="text-sm text-secondary-foreground leading-relaxed">
+      <p className="text-secondary-foreground leading-relaxed">
         {item.text}
       </p>
     </div>

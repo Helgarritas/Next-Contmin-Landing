@@ -1,16 +1,16 @@
 "use client";
 
-import { useInView, useMotionValue, useSpring } from "motion/react";
-import { ComponentPropsWithoutRef, useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-interface NumberTickerProps extends ComponentPropsWithoutRef<"span"> {
+interface NumberTickerProps {
   value: number;
   startValue?: number;
   direction?: "up" | "down";
   delay?: number;
   decimalPlaces?: number;
+  className?: string;
+  children?: React.ReactNode;
 }
 
 export function NumberTicker({
@@ -23,42 +23,65 @@ export function NumberTicker({
   ...props
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const motionValue = useMotionValue(direction === "down" ? value : startValue);
-  const springValue = useSpring(motionValue, {
-    damping: 60,
-    stiffness: 100,
-  });
-  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      const timer = setTimeout(() => {
-        motionValue.set(direction === "down" ? startValue : value);
-      }, delay * 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [motionValue, isInView, delay, value, direction, startValue]);
+    if (!ref.current) return;
 
-  useEffect(
-    () =>
-      springValue.on("change", (latest) => {
-        if (ref.current) {
-          ref.current.textContent = Intl.NumberFormat("en-US", {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          observer.disconnect();
+
+          const from = direction === "down" ? value : startValue;
+          const to = direction === "down" ? startValue : value;
+          const startTime = performance.now() + delay * 1000;
+          const duration = 1500; // ms
+
+          const formatter = new Intl.NumberFormat("en-US", {
             minimumFractionDigits: decimalPlaces,
             maximumFractionDigits: decimalPlaces,
-          }).format(Number(latest.toFixed(decimalPlaces)));
+          });
+
+          const animate = (currentTime: number) => {
+            if (currentTime < startTime) {
+              requestAnimationFrame(animate);
+              return;
+            }
+
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = from + (to - from) * eased;
+
+            if (ref.current) {
+              ref.current.textContent = formatter.format(
+                Number(current.toFixed(decimalPlaces))
+              );
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+
+          requestAnimationFrame(animate);
         }
-      }),
-    [springValue, decimalPlaces],
-  );
+      },
+      { threshold: 0, margin: "0px" } as IntersectionObserverInit
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [value, startValue, direction, delay, decimalPlaces, hasAnimated]);
 
   return (
     <span
       ref={ref}
-      className={cn(
-        "",
-        className,
-      )}
+      className={cn("", className)}
       {...props}
     >
       {startValue}

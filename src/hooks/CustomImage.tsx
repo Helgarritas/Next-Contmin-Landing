@@ -14,6 +14,9 @@ export default function CustomImage({
   alt,
   style,
   className,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  quality = 80,
+  loading = "lazy",
   ...rest
 }: CustomImageProps) {
   return (
@@ -21,6 +24,9 @@ export default function CustomImage({
       src={src}
       alt={alt}
       fill
+      sizes={sizes}
+      quality={quality}
+      loading={loading}
       style={style}
       className={`${className ?? ""} absolute top-0 left-0 object-cover -z-10`}
       {...rest}
