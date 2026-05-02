@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), { 
   ssr: false,
-  loading: () => <div className="w-full h-full bg-black animate-pulse"></div>
+  loading: () => <div className="w-full h-full bg-background animate-pulse"></div>
 });
 
 export default function BannerPage() {
@@ -16,9 +16,9 @@ export default function BannerPage() {
         max-sm:px-[32px] max-sm:pt-0
       ">
         <div className="w-full h-full relative flex items-center rounded-[20px] overflow-hidden">
-          <div className="absolute inset-0 z-0 overflow-hidden bg-black flex items-center justify-center">
+          <div className="absolute inset-0 z-0 overflow-hidden bg-background flex items-center justify-center">
             <Spline 
-              scene="https://prod.spline.design/Jfpw9IVNB7cjToCg/scene.splinecode" 
+              scene="https://prod.spline.design/LNExFyWjFzaEKY33/scene.splinecode" 
               className="w-full h-full"
               style={{ width: '100%', height: '100%' }}
             />
