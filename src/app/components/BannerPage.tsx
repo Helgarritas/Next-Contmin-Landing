@@ -10,11 +10,11 @@ export default function BannerPage() {
       ">
         {/* Contenedor del banner con fondo distinto, borde sutil y sombra para destacar del resto de la web */}
         <div className="w-full h-full relative flex items-center rounded-[30px] overflow-hidden border border-white/5 bg-gradient-to-br from-[#0c0f22] to-[#060813] shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-          
+
           {/* El contenedor de Spline */}
           <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
             <Spline
-              scene="https://prod.spline.design/LNExFyWjFzaEKY33/scene.splinecode?v=2" 
+              scene="https://prod.spline.design/LNExFyWjFzaEKY33/scene.splinecode?v=2"
               className="w-full h-full outline-none"
             />
 
@@ -40,7 +40,7 @@ export default function BannerPage() {
                 </TypingAnimation>
               </h1>
               <p className="mt-2.5 mb-6 text-secondary-foreground leading-relaxed">
-                En Drillcorp, desarrollamos soluciones mineras innovadoras y sostenibles, impulsando el crecimiento del sector con excelencia operativa y un firme compromiso con el futuro.
+                En Drillcorp, desarrollamos soluciones de perforación innovadoras y sostenibles, impulsando el crecimiento del sector con excelencia operativa y un firme compromiso con el futuro.
               </p>
               <a href="#contactar" className="inline-block">
                 <BtnPrimary text={"contactar"} />
