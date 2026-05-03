@@ -6,8 +6,8 @@ import nodemailer from "nodemailer";
 const contactSchema = z.object({
   nombre: z.string().min(2, "Nombre inválido").max(100, "Nombre muy largo").trim(),
   email: z.string().email("Correo inválido").trim(),
-  telefono: z.string().max(20).optional(),
-  empresa: z.string().max(100).optional(),
+  telefono: z.string().max(20).optional().transform(v => v === "" ? undefined : v),
+  empresa: z.string().max(100).optional().transform(v => v === "" ? undefined : v),
   mensaje: z.string().min(5, "Mensaje muy corto").max(2000, "Mensaje muy largo").trim(),
   turnstileToken: z.string().min(1, "Token de verificación requerido"),
   botField: z.string().optional(), // Honeypot
@@ -217,8 +217,10 @@ export async function POST(req: Request) {
 
   } catch (error) {
     if (error instanceof z.ZodError) {
+      const fieldErrors = error.errors.map(e => `${e.path.join(".")}: ${e.message}`).join(", ");
+      console.error("Zod validation error:", fieldErrors);
       return NextResponse.json(
-        { error: "Formato de datos inválido." },
+        { error: `Formato de datos inválido: ${fieldErrors}` },
         { status: 400 }
       );
     }
