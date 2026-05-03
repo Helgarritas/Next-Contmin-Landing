@@ -37,7 +37,12 @@ if (!empty($botField)) {
 }
 
 // Validar Turnstile
-$turnstileSecret = "0x4AAAAAADF4rBJjCrfSX2iVPfquzGJK0IY";
+$turnstileSecret = getenv('TURNSTILE_SECRET_KEY');
+if (!$turnstileSecret) {
+    http_response_code(500);
+    echo json_encode(["error" => "Configuración de seguridad del servidor incompleta."]);
+    exit;
+}
 $verifyUrl = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 $data = [
     'secret' => $turnstileSecret,
