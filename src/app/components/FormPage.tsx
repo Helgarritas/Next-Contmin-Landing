@@ -135,7 +135,8 @@ export default function FormPage() {
                 <input
                   id="telefono" name="telefono" type="tel"
                   value={formData.telefono} onChange={handleChange}
-                  placeholder="+51 999 999 999"
+                  placeholder="999 999 999"
+                  maxLength={9}
                   className="w-full pb-3 bg-transparent border-b border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary hover:border-white/40 transition-all duration-300"
                 />
               </div>

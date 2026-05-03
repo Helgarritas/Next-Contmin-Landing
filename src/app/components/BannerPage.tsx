@@ -20,7 +20,7 @@ export default function BannerPage() {
               preload="auto"
               className="w-full h-full object-cover"
             >
-              <source src="/video/banner.webm" type="video/mp4" />
+              <source src="/video/banner.webm" type="video/webm" />
             </video>
 
             {/* Gradiente izquierdo para legibilidad del texto */}

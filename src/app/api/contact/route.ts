@@ -6,7 +6,7 @@ import nodemailer from "nodemailer";
 const contactSchema = z.object({
   nombre: z.string().min(2, "Nombre inválido").max(100, "Nombre muy largo").trim(),
   email: z.string().email("Correo inválido").trim(),
-  telefono: z.string().max(20).optional().transform(v => v === "" ? undefined : v),
+  telefono: z.string().regex(/^\d{9}$/, "Ingresa 9 dígitos").optional().or(z.literal("")).transform(v => v === "" ? undefined : v),
   empresa: z.string().max(100).optional().transform(v => v === "" ? undefined : v),
   mensaje: z.string().min(5, "Mensaje muy corto").max(2000, "Mensaje muy largo").trim(),
   turnstileToken: z.string().min(1, "Token de verificación requerido"),
