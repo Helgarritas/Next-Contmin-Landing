@@ -225,8 +225,9 @@ export async function POST(req: Request) {
       );
     }
     console.error("Error al enviar correo:", error);
+    const errorMessage = error instanceof Error ? error.message : "Error desconocido";
     return NextResponse.json(
-      { error: "Error al enviar el mensaje. Intenta de nuevo." },
+      { error: `Error al enviar el mensaje: ${errorMessage}` },
       { status: 500 }
     );
   }
