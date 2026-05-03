@@ -1,6 +1,5 @@
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import BtnPrimary from "@/components/btnPrimary/BtnPrimary";
-import Spline from '@splinetool/react-spline/next';
 
 export default function BannerPage() {
   return (
@@ -8,24 +7,30 @@ export default function BannerPage() {
       <section id="hogar" className="h-[100vh] pt-[80px] px-[70px] flex items-center 
         max-sm:px-[32px] max-sm:pt-0 pb-6
       ">
-        {/* Contenedor del banner con fondo distinto, borde sutil y sombra para destacar del resto de la web */}
-        <div className="w-full h-full relative flex items-center rounded-[30px] overflow-hidden border border-white/5 bg-gradient-to-br from-[#0c0f22] to-[#060813] shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+        {/* Contenedor del banner con borde sutil y sombra */}
+        <div className="w-full h-full relative flex items-center rounded-[30px] overflow-hidden border border-white/5 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
 
-          {/* El contenedor de Spline */}
-          <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
-            <Spline
-              scene="https://prod.spline.design/LNExFyWjFzaEKY33/scene.splinecode?v=2"
-              className="w-full h-full outline-none"
-            />
+          {/* Video de fondo */}
+          <div className="absolute inset-0 z-0 w-full h-full">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover"
+            >
+              <source src="/video/banner.mp4" type="video/mp4" />
+            </video>
 
-            {/* Gradiente izquierdo para legibilidad del texto (reducido para no tapar el Spline) */}
+            {/* Gradiente izquierdo para legibilidad del texto */}
             <div
               className="absolute inset-0 z-1 pointer-events-none"
               role="presentation"
               aria-hidden="true"
               style={{ background: 'linear-gradient(to right, rgba(6,8,19,0.85) 0%, rgba(6,8,19,0.2) 25%, transparent 35%)' }}
             />
-            {/* Gradiente inferior (mucho más sutil) */}
+            {/* Gradiente inferior sutil */}
             <div
               className="absolute inset-0 bg-gradient-to-t from-[#060813]/30 to-transparent z-1 pointer-events-none h-[30%] mt-auto"
               role="presentation"
