@@ -160,7 +160,7 @@ export async function POST(req: Request) {
 
     await transporter.sendMail({
       from: `"Drillcorp Web" <${emailFrom}>`,
-      to: "poppingpleace2@gmail.com",
+      to: "hernan.villafuerte@drillcop.com.pe",
       replyTo: data.email,
       subject: `Nueva consulta web de ${data.nombre}${data.empresa ? ` — ${data.empresa}` : ""}`,
       text: [
