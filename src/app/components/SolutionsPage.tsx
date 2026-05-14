@@ -42,10 +42,10 @@ export default function SolutionsPage() {
           <h2 className="text-3xl text-center uppercase">
             <span>resolvemos problemas</span>
             <br />
-            <span>con experiencia de clase mundial</span>
+            <span>con experiencia de clase mundial.</span>
           </h2>
         </div>
-        <div className="mt-[60px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6 lg:gap-y-10">
+        <div className="mt-[60px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-9 lg:gap-y-10">
           {items.map((card, i) => (
             <SolutionCard key={i} card={card} index={i} />
           ))}

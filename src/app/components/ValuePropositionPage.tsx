@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 const items = [
   {
     title: "Reducir costos internos",
-    text: "Reducir costos a corto plazo dejando en nuestras manos la gestión de perforación mientras se centran en potenciar los recursos geológicos.",
+    text: "Asumimos la gestión de la perforación para minimizar sus costos operativos y potenciar sus recursos geológicos.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <line x1="12" y1="2" x2="12" y2="22" />
@@ -65,7 +65,7 @@ function ValueCard({
   return (
     <div
       ref={cardRef}
-      className="group relative flex flex-col items-center text-center gap-6 p-6 lg:p-8 rounded-2xl border border-border bg-card/30 opacity-0 scale-95 translate-y-5 transition-all duration-700 ease-out [&.is-visible]:opacity-100 [&.is-visible]:scale-100 [&.is-visible]:translate-y-0"
+      className="group relative flex flex-col items-center text-center  p-6 lg:p-8 rounded-2xl border border-border bg-card/30 opacity-0 scale-95 translate-y-5 transition-all duration-700 ease-out [&.is-visible]:opacity-100 [&.is-visible]:scale-100 [&.is-visible]:translate-y-0"
     >
       {/* Glow accent */}
       <div className="absolute -top-px left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -76,10 +76,10 @@ function ValueCard({
       </div>
 
       {/* Title */}
-      <h4 className="text-xl uppercase font-medium leading-tight">{item.title}</h4>
+      <h4 className="text-xl uppercase font-medium leading-tight mt-7">{item.title}</h4>
 
       {/* Description */}
-      <p className="text-description text-secondary-foreground">
+      <p className="text-description text-secondary-foreground mt-2">
         {item.text}
       </p>
     </div>
@@ -92,7 +92,7 @@ export default function ValuePropositionPage() {
       <div className="flex flex-col gap-[60px] max-sm:gap-[50px]">
         <div className="text-center">
           <h3 className="text-3xl uppercase">Propuesta de valor</h3>
-          <p className="mt-4 text-description text-secondary-foreground max-w-[600px] mx-auto">
+          <p className="mt-4 text-description text-secondary-foreground max-w-[750px] mx-auto">
             Nos enfocamos en generar impacto real en sus operaciones a través de tres pilares fundamentales.
           </p>
         </div>

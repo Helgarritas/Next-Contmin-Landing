@@ -47,3 +47,4 @@ next-env.d.ts
 
 # temp files
 screenshots.txt
+.agents/

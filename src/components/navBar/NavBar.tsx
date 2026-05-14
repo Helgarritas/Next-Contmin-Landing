@@ -154,10 +154,10 @@ export default function NavBar() {
         >
           <div className="flex items-center gap-6 lg:gap-[50px] mr-6 lg:mr-[50px]">
             {links.slice(0, 3).map((link, i) => (
-              <li 
-                key={i} 
-                onClick={() => handleScroll(link)} 
-                className="cursor-pointer text-white/60 hover:text-white transition-colors duration-300"
+              <li
+                key={i}
+                onClick={() => handleScroll(link)}
+                className="text-base cursor-pointer text-white/60 hover:text-white transition-colors duration-300"
               >
                 {link}
               </li>
