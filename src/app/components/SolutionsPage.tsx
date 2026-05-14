@@ -40,7 +40,7 @@ export default function SolutionsPage() {
       <section id="soluciones" className="mt-[180px] px-[70px] max-sm:px-[32px]">
         <div>
           <h2 className="text-3xl text-center uppercase">
-            <span>resolvemos problemas</span>
+            <span>RESOLVEMOS PROBLEMAS DE CLASE MUNDIAL</span>
             <br />
             <span>con experiencia de clase mundial.</span>
           </h2>
