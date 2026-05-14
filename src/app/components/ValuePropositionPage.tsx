@@ -65,7 +65,7 @@ function ValueCard({
   return (
     <div
       ref={cardRef}
-      className="group relative flex flex-col items-center text-center gap-6 p-8 rounded-2xl border border-border bg-card/30 opacity-0 scale-95 translate-y-5 transition-all duration-700 ease-out [&.is-visible]:opacity-100 [&.is-visible]:scale-100 [&.is-visible]:translate-y-0"
+      className="group relative flex flex-col items-center text-center gap-6 p-6 lg:p-8 rounded-2xl border border-border bg-card/30 opacity-0 scale-95 translate-y-5 transition-all duration-700 ease-out [&.is-visible]:opacity-100 [&.is-visible]:scale-100 [&.is-visible]:translate-y-0"
     >
       {/* Glow accent */}
       <div className="absolute -top-px left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -79,7 +79,7 @@ function ValueCard({
       <h4 className="text-xl uppercase font-medium leading-tight">{item.title}</h4>
 
       {/* Description */}
-      <p className="text-secondary-foreground leading-relaxed">
+      <p className="text-description text-secondary-foreground">
         {item.text}
       </p>
     </div>
@@ -92,11 +92,11 @@ export default function ValuePropositionPage() {
       <div className="flex flex-col gap-[60px] max-sm:gap-[50px]">
         <div className="text-center">
           <h3 className="text-3xl uppercase">Propuesta de valor</h3>
-          <p className="mt-4 text-secondary-foreground max-w-[600px] mx-auto">
+          <p className="mt-4 text-description text-secondary-foreground max-w-[600px] mx-auto">
             Nos enfocamos en generar impacto real en sus operaciones a través de tres pilares fundamentales.
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-8 max-sm:grid-cols-1 max-sm:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {items.map((item, i) => (
             <ValueCard key={i} item={item} index={i} />
           ))}

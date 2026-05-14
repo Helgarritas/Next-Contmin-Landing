@@ -149,11 +149,11 @@ export default function NavBar() {
         {/* Links desktop */}
         <ul
           ref={ulRef}
-          className="relative z-20 w-1/2 ml-auto h-full flex items-center justify-between uppercase text-sm
+          className="relative z-20 w-auto ml-auto h-full flex items-center justify-end uppercase text-sm
             max-sm:hidden"
         >
-          <div className="flex items-center gap-[50px]">
-            {links.slice(0, 4).map((link, i) => (
+          <div className="flex items-center gap-6 lg:gap-[50px] mr-6 lg:mr-[50px]">
+            {links.slice(0, 3).map((link, i) => (
               <li 
                 key={i} 
                 onClick={() => handleScroll(link)} 

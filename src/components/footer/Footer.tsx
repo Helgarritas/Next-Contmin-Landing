@@ -32,46 +32,36 @@ export default function Footer() {
             </div>
           </div>
           <div className="col-start-3 col-end-5 grid grid-cols-2
-            max-sm:mt-10
+            max-sm:mt-10 max-sm:grid-cols-1 max-sm:gap-10
           ">
-            <div className="pl-6 flex flex-col items-start gap-1.5 text-sm uppercase
-              max-sm:pl-0
-            ">
-              {["hogar", "propuesta", "soluciones"].map((link, i) => (
+            <div className="pl-6 flex flex-col items-start gap-1.5 uppercase max-sm:pl-0">
+              <h4 className="text-secondary-foreground text-base tracking-[0.2em] mb-1">Navegación</h4>
+              {["inicio", "propuesta", "soluciones"].map((link, i) => (
                 <button key={i} onClick={() => handleScroll(link)}>
-                  <BtnSnake text={link} />
+                  <BtnSnake className="text-base" text={link} />
                 </button>
               ))}
             </div>
-            <div className="pl-6 flex flex-col items-start gap-1.5 text-sm uppercase
-              max-sm:pl-0
-            ">
-              {[
-                {
-                  item: "correo drillcorp",
-                  link: "mailto:contacto@drillcorp.com.pe"
-                },
-                {
-                  item: "hernán villafuerte",
-                  link: "mailto:hernan.villafuerte@drillcorp.com.pe"
-                },
-                {
-                  item: "+51 982561603",
-                  link: "tel:+51982561603"
-                },
-                {
-                  item: "daniel gutierrez",
-                  link: "mailto:daniel.gutierrez@drillcorp.com.pe"
-                },
-                {
-                  item: "+51 948125458",
-                  link: "tel:+51948125458"
-                },
-              ].map((link, i) => (
-                <Link key={i} href={`${link.link}`} target="_blank">
-                  <BtnSnake text={link.item} />
+            <div className="pl-6 flex flex-col items-start gap-7 text-sm uppercase max-sm:pl-0">
+              <div className="flex flex-col items-start gap-1.5">
+                <h4 className="text-secondary-foreground text-base tracking-[0.2em] mb-1">Hernán Villafuerte</h4>
+                <Link href="tel:+51982561603" target="_blank">
+                  <BtnSnake className="text-base" text="+51 982561603" />
                 </Link>
-              ))}
+                <Link href="mailto:hernan.villafuerte@drillcorp.com.pe" target="_blank">
+                  <BtnSnake className="text-base max-sm:text-[12px]" text="hernan.villafuerte@drillcorp.com.pe" />
+                </Link>
+              </div>
+
+              <div className="flex flex-col items-start gap-1.5">
+                <h4 className="text-secondary-foreground font-bold tracking-[0.2em] text-base mb-1">Daniel Gutierrez</h4>
+                <Link href="tel:+51948125458" target="_blank">
+                  <BtnSnake className="text-base" text="+51 948125458" />
+                </Link>
+                <Link href="mailto:daniel.gutierrez@drillcorp.com.pe" target="_blank">
+                  <BtnSnake className="text-base max-sm:text-[12px]" text="daniel.gutierrez@drillcorp.com.pe" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

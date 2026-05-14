@@ -40,7 +40,7 @@ export default function SolutionCard({ card, index }: Props) {
   return (
     <div
       ref={cardRef}
-      className="solution-card group w-full h-[400px] relative flex items-end rounded-2xl overflow-hidden cursor-pointer border border-white/5 transition-all duration-500 bg-[#060813] opacity-0 translate-y-4 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0"
+      className="solution-card group w-full h-[340px] md:h-[350px] lg:h-[400px] relative flex items-end rounded-2xl overflow-hidden cursor-pointer border border-white/5 transition-all duration-500 bg-[#060813] opacity-0 translate-y-4 [&.is-visible]:opacity-100 [&.is-visible]:translate-y-0"
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Background Image */}
@@ -50,7 +50,7 @@ export default function SolutionCard({ card, index }: Props) {
           alt={card.title}
           loading="lazy"
           quality={75}
-          className="w-full h-full object-cover object-[center_15%] transition-all duration-700 ease-out group-hover:scale-110 opacity-50 group-hover:opacity-90 grayscale-[60%] group-hover:grayscale-0"
+          className="w-full h-full object-cover object-[center_15%] md:object-center lg:object-[center_15%] transition-all duration-700 ease-out group-hover:scale-110 opacity-50 group-hover:opacity-90 grayscale-[60%] group-hover:grayscale-0"
         />
       </div>
 
@@ -61,12 +61,12 @@ export default function SolutionCard({ card, index }: Props) {
       <div className="p-5 pb-4 relative z-20 w-full transition-transform duration-500 ease-out">
         {/* Accent Line */}
         <div className="w-8 h-[2px] bg-primary mb-3 transition-all duration-500 ease-out group-hover:w-16" />
-        
-        <h3 className="text-base uppercase font-semibold text-white mb-1.5 transition-colors duration-300">
+
+        <h3 className="text-base uppercase font-semibold text-foreground mb-1.5 transition-colors duration-300">
           {card.title}
         </h3>
-        
-        <p className="text-secondary-foreground leading-relaxed line-clamp-3">
+
+        <p className="text-description text-secondary-foreground line-clamp-3">
           {card.text}
         </p>
       </div>

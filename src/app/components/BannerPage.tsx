@@ -44,10 +44,10 @@ export default function BannerPage() {
                   la innovacion es parte de nuestro adn
                 </TypingAnimation>
               </h1>
-              <p className="mt-2.5 mb-6 text-secondary-foreground leading-relaxed">
+              <p className="mt-2.5 mb-6 text-description text-secondary-foreground">
                 En Drillcorp, desarrollamos soluciones de perforación innovadoras y sostenibles, impulsando el crecimiento del sector con excelencia operativa y un firme compromiso con el futuro.
               </p>
-              <a href="#contactar" className="inline-block">
+              <a href="#contactar" className="block w-full">
                 <BtnPrimary text={"contactar"} />
               </a>
             </div>

@@ -18,7 +18,7 @@ const items = [
   },
   {
     title: "Perforación WW",
-    text: 'Construcción de pozos de agua (Water Well) con equipos de última generación, garantizandoeficiencia y rendimiento hídrico.',
+    text: 'Construcción de pozos de agua con equipos de última generación, garantizando eficiencia y rendimiento.',
     image: "/image/solutions/ww_v2.png"
   },
   {
@@ -45,9 +45,7 @@ export default function SolutionsPage() {
             <span>con experiencia de clase mundial</span>
           </h2>
         </div>
-        <div className="mt-[60px] grid grid-cols-3 gap-6 gap-y-10
-          max-sm:grid-cols-1 max-sm:gap-8
-        ">
+        <div className="mt-[60px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6 lg:gap-y-10">
           {items.map((card, i) => (
             <SolutionCard key={i} card={card} index={i} />
           ))}

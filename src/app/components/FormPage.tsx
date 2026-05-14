@@ -4,6 +4,35 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
+interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+  label: string;
+  isTextarea?: boolean;
+  rows?: number;
+}
+
+const FormInput = ({ label, isTextarea, className, ...props }: FormInputProps) => {
+  const baseClasses = "w-full bg-transparent border-b border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary hover:border-white/40 transition-all duration-300";
+
+  return (
+    <div className="flex flex-col group">
+      <label htmlFor={props.id || props.name} className="text-sm uppercase tracking-[0.2em] text-white mb-2 transition-colors">
+        {label}
+      </label>
+      {isTextarea ? (
+        <textarea
+          {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+          className={`${baseClasses} py-3 resize-none text-[17px] ${className || ""}`}
+        />
+      ) : (
+        <input
+          {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
+          className={`${baseClasses} pb-2 text-[17px] ${className || ""}`}
+        />
+      )}
+    </div>
+  );
+};
+
 export default function FormPage() {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -71,7 +100,7 @@ export default function FormPage() {
     >
       <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         {/* Columna izquierda - Imagen */}
-        <div className="relative w-full h-[600px] max-sm:h-[400px]">
+        <div className="relative w-full h-[250px] md:h-[400px] lg:h-[600px]">
           <div className="relative w-full h-full z-10 bg-[#060813] [mask-image:linear-gradient(to_bottom,black_85%,transparent)]">
             <Image
               src="/image/Form_image.jpg"
@@ -91,81 +120,48 @@ export default function FormPage() {
             <h2 className="text-3xl uppercase mb-3">
               Contáctanos
             </h2>
-            <p className="text-secondary-foreground leading-relaxed w-full">
+            <p className="text-description text-secondary-foreground w-full">
               Nuestro equipo de especialistas está listo para analizar tus requerimientos y ofrecerte la mejor solución en perforación.
             </p>
           </div>
 
           <form
             onSubmit={handleSubmit}
-            className="relative flex flex-col gap-8 w-full p-8 sm:p-10 rounded-2xl border border-border bg-card/50 shadow-2xl"
+            className="relative flex flex-col gap-6 sm:gap-8 w-full p-6 sm:p-10 rounded-2xl border border-border bg-card/50 shadow-2xl"
           >
-            <div className="grid grid-cols-2 gap-8 max-sm:grid-cols-1">
-              <div className="flex flex-col group">
-                <label htmlFor="nombre" className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-2 transition-colors">
-                  Nombre Completo
-                </label>
-                <input
-                  id="nombre" name="nombre" type="text"
-                  value={formData.nombre} onChange={handleChange}
-                  placeholder="Ingresa tu nombre"
-                  className="w-full pb-3 bg-transparent border-b border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary hover:border-white/40 transition-all duration-300"
-                  required
-                />
-              </div>
-              <div className="flex flex-col group">
-                <label htmlFor="email" className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-2 transition-colors">
-                  Correo Electrónico
-                </label>
-                <input
-                  id="email" name="email" type="email"
-                  value={formData.email} onChange={handleChange}
-                  placeholder="tu@email.com"
-                  className="w-full pb-3 bg-transparent border-b border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary hover:border-white/40 transition-all duration-300"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-8 max-sm:grid-cols-1">
-              <div className="flex flex-col group">
-                <label htmlFor="telefono" className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-2 transition-colors">
-                  Teléfono
-                </label>
-                <input
-                  id="telefono" name="telefono" type="tel"
-                  value={formData.telefono} onChange={handleChange}
-                  placeholder="999 999 999"
-                  maxLength={9}
-                  className="w-full pb-3 bg-transparent border-b border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary hover:border-white/40 transition-all duration-300"
-                />
-              </div>
-              <div className="flex flex-col group">
-                <label htmlFor="empresa" className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-2 transition-colors">
-                  Empresa
-                </label>
-                <input
-                  id="empresa" name="empresa" type="text"
-                  value={formData.empresa} onChange={handleChange}
-                  placeholder="Nombre de tu empresa"
-                  className="w-full pb-3 bg-transparent border-b border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary hover:border-white/40 transition-all duration-300"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col group">
-              <label htmlFor="mensaje" className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-2 transition-colors">
-                Mensaje
-              </label>
-              <textarea
-                id="mensaje" name="mensaje"
-                value={formData.mensaje} onChange={handleChange}
-                placeholder="Cuéntanos sobre tu proyecto o requerimiento..."
-                rows={3}
-                className="w-full py-3 bg-transparent border-b border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary hover:border-white/40 transition-all duration-300 resize-none"
-                required
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              <FormInput
+                label="Nombre Completo" id="nombre" name="nombre" type="text"
+                value={formData.nombre} onChange={handleChange}
+                placeholder="Ingresa tu nombre" required
+              />
+              <FormInput
+                label="Correo Electrónico" id="email" name="email" type="email"
+                value={formData.email} onChange={handleChange}
+                placeholder="tu@email.com" required
               />
             </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              <FormInput
+                label="Teléfono" id="telefono" name="telefono" type="tel"
+                value={formData.telefono} onChange={handleChange}
+                placeholder="999 999 999" maxLength={9}
+              />
+              <FormInput
+                label="Empresa" id="empresa" name="empresa" type="text"
+                value={formData.empresa} onChange={handleChange}
+                placeholder="Nombre de tu empresa"
+              />
+            </div>
+
+            <FormInput
+              isTextarea
+              label="Mensaje" id="mensaje" name="mensaje"
+              value={formData.mensaje} onChange={handleChange}
+              placeholder="Cuéntanos sobre tu proyecto o requerimiento..."
+              rows={3} required
+            />
 
             {/* Honeypot field */}
             <div className="hidden" aria-hidden="true">
@@ -195,7 +191,6 @@ export default function FormPage() {
               >
                 <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-              {/* Sutil brillo industrial al hacer hover */}
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             </button>
 
