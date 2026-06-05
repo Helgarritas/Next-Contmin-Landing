@@ -5,19 +5,22 @@ import { HyperText } from "../magicui/hyper-text";
 
 interface Props {
   text: string;
+  scrollTarget?: string;
   className?: string;
 }
 
-export default function BtnPrimary({ text = "contactar", className }: Props) {
+export default function BtnPrimary({ text = "contactar", scrollTarget, className }: Props) {
   const handleClick = useCallback(() => {
-    const el = document.getElementById(text);
+    // Use scrollTarget if provided, otherwise fallback to text (for backward compat)
+    const targetId = scrollTarget || text;
+    const el = document.getElementById(targetId);
     if (el) {
       const yOffset = -80; // el espacio que quieres dejar
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({ top: y, behavior: "smooth" });
     }
-  }, [text]);
+  }, [text, scrollTarget]);
 
   return (
     <button
@@ -38,4 +41,3 @@ export default function BtnPrimary({ text = "contactar", className }: Props) {
     </button>
   );
 }
-

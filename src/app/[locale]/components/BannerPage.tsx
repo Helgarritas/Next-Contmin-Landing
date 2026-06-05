@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import BtnPrimary from "@/components/btnPrimary/BtnPrimary";
 
 export default function BannerPage() {
+  const t = useTranslations("banner");
+
   return (
     <>
       <section id="hogar" className="h-[100vh] pt-[80px] px-[70px] flex items-center 
@@ -41,15 +44,13 @@ export default function BannerPage() {
             <div className="pointer-events-auto">
               <h1 className="uppercase min-h-[180px] max-sm:min-h-[144px]">
                 <TypingAnimation className="text-6xl max-sm:text-5xl" duration={50}>
-                  la innovacion es parte de nuestro adn
+                  {t("title")}
                 </TypingAnimation>
               </h1>
               <p className="mt-2.5 mb-6 text-description text-secondary-foreground">
-                En Drillcorp, desarrollamos soluciones de perforación innovadoras y sostenibles, impulsando el crecimiento del sector con excelencia operativa y un firme compromiso con el futuro.
+                {t("description")}
               </p>
-              <a href="#contactar" className="block w-full">
-                <BtnPrimary text={"contactar"} />
-              </a>
+              <BtnPrimary text={t("cta")} scrollTarget="contactar" />
             </div>
           </div>
         </div>

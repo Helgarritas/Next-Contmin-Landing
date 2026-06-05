@@ -1,4 +1,4 @@
-import './btnSnake.css';
+import { HyperText } from '../magicui/hyper-text';
 
 interface Props {
   text: string;
@@ -7,10 +7,8 @@ interface Props {
 
 export default function BtnSnake({ text, className }: Props) {
   return (
-    <>
-      <p className={`btn_snake uppercase  ${className}`}>
-        <span className="hover-underline-animation after:bg-white">{text}</span>
-      </p>
-    </>
+    <div className={`cursor-pointer uppercase text-sm text-white/60 hover:text-white transition-colors duration-300 ${className || ''}`}>
+      <HyperText duration={600}>{text}</HyperText>
+    </div>
   )
 }

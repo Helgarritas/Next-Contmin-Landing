@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "title": "Drillcorp | World-Class Mining Drilling in Peru",
+    "titleTemplate": "%s | Drillcorp",
+    "description": "Drillcorp: leading company in diamond, RC, geotechnical, hydrogeological drilling and grouting for high-demand mining projects in Peru and Latin America. 6+ service lines with international safety and quality standards.",
+    "ogTitle": "Drillcorp | World-Class Mining Drilling",
+    "ogDescription": "Technical drilling solutions for the mining industry. Diamond, RC, grouting, geotechnical, hydrogeological and geological services with international standards.",
+    "ogImageAlt": "Drillcorp - World-Class Mining Drilling",
+    "twitterTitle": "Drillcorp | World-Class Mining Drilling",
+    "twitterDescription": "Technical drilling solutions for the mining industry with international safety and quality standards."
+  },
+  "nav": {
+    "home": "home",
+    "proposal": "value",
+    "solutions": "solutions",
+    "contact": "contact",
+    "copyright": "© 2025 Drillcorp",
+    "openMenu": "Open menu"
+  },
+  "banner": {
+    "subtitle": "Drillcorp Mining Solutions",
+    "title": "INNOVATION IS PART OF OUR DNA",
+    "description": "We develop innovative and sustainable drilling solutions, driving sector growth with operational excellence and a strong commitment to the future.",
+    "cta": "contact our experts",
+    "scrollDown": "Discover"
+  },
+  "about": {
+    "title": "about our company",
+    "description": "We are a company specialized in technical drilling services for high-demand projects. We operate under the strictest international standards of safety, efficiency and quality control. Our commitment is centered on four fundamental pillars: rigorous compliance with delivery deadlines, optimization of our clients' operational costs, delivery of highly reliable geological information, and the development of operations that prioritize safety and environmental sustainability.",
+    "stats": [
+      { "prefix": "+", "value": 6, "label": "drilling types" },
+      { "prefix": "%", "value": 100, "label": "safe operations" },
+      { "prefix": "+", "value": 6, "label": "service lines" },
+      { "prefix": "+", "value": 24, "label": "hours of operational support" }
+    ]
+  },
+  "valueProposition": {
+    "title": "Value proposition",
+    "subtitle": "We focus on generating real impact on your operations through three fundamental pillars.",
+    "items": [
+      {
+        "title": "Reduce internal costs",
+        "text": "We take over drilling management to minimize your operational costs and enhance your geological resources."
+      },
+      {
+        "title": "Reduce drilling costs",
+        "text": "We implement and develop improvements to reduce operational costs and increase productivity and quality."
+      },
+      {
+        "title": "Optimize drilling projects",
+        "text": "Drilling projects will be stable and efficient in the short and medium term."
+      }
+    ]
+  },
+  "solutions": {
+    "titleLine1": "WE SOLVE WORLD-CLASS PROBLEMS",
+    "titleLine2": "with world-class expertise.",
+    "items": [
+      {
+        "title": "Diamond Drilling",
+        "text": "Rock core extraction on surface and underground mining with millimetric precision."
+      },
+      {
+        "title": "Grouting Drilling",
+        "text": "Cement and grout injection for ground stabilization and leak sealing."
+      },
+      {
+        "title": "RC Drilling",
+        "text": "Reverse circulation for fast and efficient mining exploration with continuous sampling."
+      },
+      {
+        "title": "WW Drilling",
+        "text": "Water well construction with state-of-the-art equipment, ensuring efficiency and performance."
+      },
+      {
+        "title": "Geotechnical & Hydrogeological Drilling",
+        "text": "Soil and groundwater investigation for engineering projects."
+      },
+      {
+        "title": "Geological Services",
+        "text": "Mapping, sampling and field geological analysis for exploration and deposit evaluation."
+      }
+    ]
+  },
+  "team": {
+    "title": "A team of experts",
+    "description": "Professionals with extensive experience in the mining industry, committed to operational excellence and innovation. Our team guarantees exceptional results in every project.",
+    "members": [
+      { "name": "Hernán Villafuerte", "role": "Founder & CEO" },
+      { "name": "Daniel Gutierrez", "role": "Operations Manager" },
+      { "name": "Specialist TBD", "role": "Specialist Engineer" }
+    ]
+  },
+  "form": {
+    "title": "let's keep growing",
+    "imageAlt": "Drilling equipment in operation",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone",
+    "company": "Company",
+    "message": "Message",
+    "namePlaceholder": "Enter your name",
+    "emailPlaceholder": "you@email.com",
+    "phonePlaceholder": "999 999 999",
+    "companyPlaceholder": "Your company name",
+    "messagePlaceholder": "Tell us about your project or requirement...",
+    "submitLoading": "Processing request...",
+    "submitButton": "Send Message",
+    "successMessage": "[LOG_SUCCESS]: Message transmitted successfully.",
+    "errorDefault": "Transmission failed.",
+    "errorSend": "Error sending message",
+    "errorCaptcha": "Please complete the security verification.",
+    "errorUnexpected": "Unexpected error"
+  },
+  "footer": {
+    "downloadBrochure": "download brochure",
+    "download": "download",
+    "navigation": "Navigation",
+    "navLinks": ["home", "value", "solutions"],
+    "copyright": "© 2025 Drillcorp"
+  },
+  "languageSwitcher": {
+    "es": "ES",
+    "en": "EN"
+  }
+}

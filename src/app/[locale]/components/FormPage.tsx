@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
@@ -15,7 +16,7 @@ const FormInput = ({ label, isTextarea, className, ...props }: FormInputProps) =
 
   return (
     <div className="flex flex-col group">
-      <label htmlFor={props.id || props.name} className="text-sm uppercase tracking-[0.2em] text-white mb-2 transition-colors">
+      <label htmlFor={props.id || props.name} className="text-[16px] capitalize text-foreground mb-2 transition-colors">
         {label}
       </label>
       {isTextarea ? (
@@ -34,6 +35,7 @@ const FormInput = ({ label, isTextarea, className, ...props }: FormInputProps) =
 };
 
 export default function FormPage() {
+  const t = useTranslations("form");
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
@@ -58,7 +60,7 @@ export default function FormPage() {
 
     if (!turnstileToken) {
       setStatus("error");
-      setErrorMsg("Completa la verificación de seguridad.");
+      setErrorMsg(t("errorCaptcha"));
       return;
     }
 
@@ -77,7 +79,7 @@ export default function FormPage() {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Error al enviar el mensaje");
+        throw new Error(data.error || t("errorSend"));
       }
 
       setStatus("success");
@@ -87,7 +89,7 @@ export default function FormPage() {
       setTimeout(() => setStatus("idle"), 5000);
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Error inesperado");
+      setErrorMsg(err instanceof Error ? err.message : t("errorUnexpected"));
       turnstileRef.current?.reset();
       setTimeout(() => setStatus("idle"), 5000);
     }
@@ -104,7 +106,7 @@ export default function FormPage() {
           <div className="relative w-full h-full z-10 bg-[#060813] [mask-image:linear-gradient(to_bottom,black_85%,transparent)]">
             <Image
               src="/image/Form_image.jpg"
-              alt="Equipo de perforación en operación"
+              alt={t("imageAlt")}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               quality={80}
@@ -117,12 +119,9 @@ export default function FormPage() {
         {/* Columna derecha - Título + Formulario */}
         <div className="flex flex-col w-full">
           <div className="mb-10">
-            <h2 className="text-3xl uppercase mb-3">
-              Contáctanos
+            <h2 className="text-3xl uppercase text-center">
+              {t("title")}
             </h2>
-            <p className="text-description text-secondary-foreground w-full">
-              Nuestro equipo de especialistas está listo para analizar tus requerimientos y ofrecerte la mejor solución en perforación.
-            </p>
           </div>
 
           <form
@@ -131,35 +130,35 @@ export default function FormPage() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               <FormInput
-                label="Nombre Completo" id="nombre" name="nombre" type="text"
+                label={t("fullName")} id="nombre" name="nombre" type="text"
                 value={formData.nombre} onChange={handleChange}
-                placeholder="Ingresa tu nombre" required
+                placeholder={t("namePlaceholder")} required
               />
               <FormInput
-                label="Correo Electrónico" id="email" name="email" type="email"
+                label={t("email")} id="email" name="email" type="email"
                 value={formData.email} onChange={handleChange}
-                placeholder="tu@email.com" required
+                placeholder={t("emailPlaceholder")} required
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               <FormInput
-                label="Teléfono" id="telefono" name="telefono" type="tel"
+                label={t("phone")} id="telefono" name="telefono" type="tel"
                 value={formData.telefono} onChange={handleChange}
-                placeholder="999 999 999" maxLength={9}
+                placeholder={t("phonePlaceholder")} maxLength={9}
               />
               <FormInput
-                label="Empresa" id="empresa" name="empresa" type="text"
+                label={t("company")} id="empresa" name="empresa" type="text"
                 value={formData.empresa} onChange={handleChange}
-                placeholder="Nombre de tu empresa"
+                placeholder={t("companyPlaceholder")}
               />
             </div>
 
             <FormInput
               isTextarea
-              label="Mensaje" id="mensaje" name="mensaje"
+              label={t("message")} id="mensaje" name="mensaje"
               value={formData.mensaje} onChange={handleChange}
-              placeholder="Cuéntanos sobre tu proyecto o requerimiento..."
+              placeholder={t("messagePlaceholder")}
               rows={3} required
             />
 
@@ -184,7 +183,7 @@ export default function FormPage() {
               disabled={status === "loading" || !turnstileToken}
               className="mt-4 flex items-center justify-between w-full h-14 px-6 bg-white text-black font-bold uppercase text-[11px] tracking-[0.2em] hover:bg-primary hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
             >
-              <span className="relative z-10">{status === "loading" ? "Procesando solicitud..." : "Enviar Mensaje"}</span>
+              <span className="relative z-10">{status === "loading" ? t("submitLoading") : t("submitButton")}</span>
               <svg
                 className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300 relative z-10"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -197,13 +196,13 @@ export default function FormPage() {
             {status === "success" && (
               <div className="flex items-center gap-3 mt-2 text-[10px] font-bold tracking-[0.15em] text-green-500 uppercase animate-in fade-in slide-in-from-left-2">
                 <span className="px-1.5 py-0.5 border border-green-500/50">OK</span>
-                <span>[LOG_SUCCESS]: Mensaje transmitido correctamente.</span>
+                <span>{t("successMessage")}</span>
               </div>
             )}
             {status === "error" && (
               <div className="flex items-center gap-3 mt-2 text-[10px] font-bold tracking-[0.15em] text-red-500 uppercase animate-in fade-in slide-in-from-left-2">
                 <span className="px-1.5 py-0.5 border border-red-500/50">ERR</span>
-                <span>[LOG_ERROR]: {errorMsg || "Fallo en la transmisión."}</span>
+                <span>[LOG_ERROR]: {errorMsg || t("errorDefault")}</span>
               </div>
             )}
           </form>

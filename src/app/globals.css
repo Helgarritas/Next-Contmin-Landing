@@ -118,7 +118,7 @@
 @layer components {
   .text-description {
     font-size: 17.5px;
-    line-height: 1.625;
+    line-height: 1.45;
   }
 }
 
@@ -146,4 +146,22 @@ html {
 .animate-kenburns {
   animation: kenburns 25s ease-in-out infinite;
   will-change: transform;
+}
+
+/* ── Fade In Up (used by Banner text) ── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }

@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Drillcorp | Perforación Minera de Clase Mundial en Perú",
+    "titleTemplate": "%s | Drillcorp",
+    "description": "Drillcorp: empresa líder en perforación diamantina, RC, geotécnica, hidrogeológica e inyecciones para proyectos mineros de alta exigencia en Perú y Latinoamérica. +6 líneas de servicio con estándares internacionales de seguridad y calidad.",
+    "ogTitle": "Drillcorp | Perforación Minera de Clase Mundial",
+    "ogDescription": "Soluciones de perforación técnica para la industria minera. Diamantina, RC, inyecciones, geotécnica, hidrogeológica y servicios geológicos con estándares internacionales.",
+    "ogImageAlt": "Drillcorp - Perforación Minera de Clase Mundial",
+    "twitterTitle": "Drillcorp | Perforación Minera de Clase Mundial",
+    "twitterDescription": "Soluciones de perforación técnica para la industria minera con estándares internacionales de seguridad y calidad."
+  },
+  "nav": {
+    "home": "hogar",
+    "proposal": "propuesta",
+    "solutions": "soluciones",
+    "contact": "contactar",
+    "copyright": "© 2025 Drillcorp",
+    "openMenu": "Abrir menú"
+  },
+  "banner": {
+    "subtitle": "Drillcorp Mining Solutions",
+    "title": "LA INNOVACIÓN ES PARTE DE NUESTRO ADN",
+    "description": "Desarrollamos soluciones de perforación innovadoras y sostenibles, impulsando el crecimiento del sector con excelencia operativa y un firme compromiso con el futuro.",
+    "cta": "contactar",
+    "scrollDown": "Descubrir"
+  },
+  "about": {
+    "title": "acerca de nuestra empresa",
+    "description": "Somos una empresa especializada en servicios de perforación técnica para proyectos de alta exigencia. Operamos bajo los más estrictos estándares internacionales de seguridad, eficiencia y control de calidad. Nuestro compromiso se centra en cuatro pilares fundamentales: el cumplimiento riguroso de los plazos de entrega, la optimización de los costos operativos de nuestros clientes, la entrega de información geológica altamente confiable y el desarrollo de operaciones que priorizan la seguridad y la sostenibilidad ambiental.",
+    "stats": [
+      {
+        "prefix": "+",
+        "value": 6,
+        "label": "tipos de perforación"
+      },
+      {
+        "prefix": "%",
+        "value": 100,
+        "label": "operaciones seguras"
+      },
+      {
+        "prefix": "+",
+        "value": 6,
+        "label": "líneas de servicio"
+      },
+      {
+        "prefix": "+",
+        "value": 24,
+        "label": "horas de soporte operativo"
+      }
+    ]
+  },
+  "valueProposition": {
+    "title": "Propuesta de valor",
+    "subtitle": "Nos enfocamos en generar impacto real en sus operaciones a través de tres pilares fundamentales.",
+    "items": [
+      {
+        "title": "Reducir costos internos",
+        "text": "Asumimos la gestión de la perforación para minimizar sus costos operativos y potenciar sus recursos geológicos."
+      },
+      {
+        "title": "Reducir costos de perforación",
+        "text": "Implementamos y desarrollamos mejoras para reducir costos operativos e incrementar la productividad y calidad."
+      },
+      {
+        "title": "Optimización de proyectos",
+        "text": "Los proyectos de perforación serán estables y eficientes en el corto y mediano plazo."
+      }
+    ]
+  },
+  "solutions": {
+    "titleLine1": "resolvemos problemas",
+    "titleLine2": "con experiencia de clase mundial",
+    "items": [
+      {
+        "title": "Perforación Diamantina",
+        "text": "Extracción de testigos de roca en superficie e interior mina con precisión milimétrica."
+      },
+      {
+        "title": "Perforación para Inyecciones",
+        "text": "Inyección de cemento y lechada para estabilización de terreno y sellado de filtraciones."
+      },
+      {
+        "title": "Perforación RC",
+        "text": "Circulación reversa para exploración minera rápida y eficiente con muestreo continuo."
+      },
+      {
+        "title": "Perforación WW",
+        "text": "Construcción de pozos de agua con equipos de última generación, garantizando eficiencia y rendimiento."
+      },
+      {
+        "title": "Perforación Geotécnica e Hidrogeología",
+        "text": "Investigación de suelos y aguas subterráneas para proyectos de ingeniería."
+      },
+      {
+        "title": "Servicios Geológicos",
+        "text": "Mapeo, muestreo y análisis geológico de campo para exploración y evaluación de yacimientos."
+      }
+    ]
+  },
+  "team": {
+    "title": "Un equipo de expertos",
+    "description": "Profesionales con amplia experiencia en la industria minera, comprometidos con la excelencia operativa y la innovación. Nuestro equipo garantiza resultados excepcionales en cada proyecto.",
+    "members": [
+      {
+        "name": "Hernán Villafuerte",
+        "role": "Fundador & CEO"
+      },
+      {
+        "name": "Daniel Gutierrez",
+        "role": "Gerente de Operaciones"
+      },
+      {
+        "name": "Ignacio Villafuerte",
+        "role": "Ingeniero Especialista"
+      }
+    ]
+  },
+  "form": {
+    "title": "sigamos creciendo",
+    "imageAlt": "Equipo de perforación en operación",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "company": "Empresa",
+    "message": "Mensaje",
+    "namePlaceholder": "Ingresa tu nombre",
+    "emailPlaceholder": "tu@email.com",
+    "phonePlaceholder": "999 999 999",
+    "companyPlaceholder": "Nombre de tu empresa",
+    "messagePlaceholder": "Cuéntanos sobre tu proyecto o requerimiento...",
+    "submitLoading": "Procesando solicitud...",
+    "submitButton": "Enviar Mensaje",
+    "successMessage": "[LOG_SUCCESS]: Mensaje transmitido correctamente.",
+    "errorDefault": "Fallo en la transmisión.",
+    "errorSend": "Error al enviar el mensaje",
+    "errorCaptcha": "Completa la verificación de seguridad.",
+    "errorUnexpected": "Error inesperado"
+  },
+  "footer": {
+    "downloadBrochure": "descargar brochure",
+    "download": "descargar",
+    "navigation": "Navegación",
+    "navLinks": [
+      "inicio",
+      "propuesta",
+      "soluciones"
+    ],
+    "copyright": "© 2025 Drillcorp"
+  },
+  "languageSwitcher": {
+    "es": "ES",
+    "en": "EN"
+  }
+}
